@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>      
-     table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 80%;
+    <style> 
+    section{
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1%;
+        padding: 1%;
+        border: solid 1px black;
+        width: 60%;
+        text-align: center;
         margin-left: auto;
-        margin-right:auto;
-        }
-
-        th{
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid black;
-            text-align: center;
-            padding: 8px;
-            font-size: 15px;
-        }
-        #w{
-            width: 30%;
-        }
-        #p{
-           text-align: center;
-        }
-        td{
-            border: 1px solid black;
-            text-align: left;
-            padding: 8px;
-            font-size: 10px;
-        }
-        tr:hover {background-color:#f5f5f5;}
+        margin-right: auto;
+    } 
+    .content{
+        display: flex;
+        flex-direction: row;
+        text-align: left;
+    }   
+    .data{
+        padding-left: 1%; 
+        display: flex;
+        flex-direction: column;
+    } 
+    .content img{
+        border-radius: 5%;         
+    }
+    
 
     </style>
 </head>
 <body>
 
-<table>
-    <tr>
-        <th >Photo</th>
-        <th>Name</th>
-        <th id="w">Biography</th>
-        <th>Birthdate</th>
-        <th>Birth Place</th>
-        <th>Death</th>
-        <th>Death Place</th>
-    </tr>
     <% @actors.each do |item| %>
-        <tr>
-            <td id="p"><img src=<%= item.image_url %>></td>
-            <td><%= item.name %></td>
-            <td><%= item.bio %></td>
-            <td><%= item.birth_date %></td>
-            <td><%= item.birth_place %></td>
-            <td><%= item.death_date %></td>
-            <td><%= item.death_place %></td>
-          
-        </tr>
-    <%end%>
-</table>
 
+        <% if item.alive == false %>
+            <section> 
+                <div><strong><%= item.name %></strong></div> 
+                <div class = "content">
+                    <img src=<%= item.image_url %>>
+                    <div class = "data">
+                        <p><strong>Birthdate:</strong> <%= item.birth_date %></p> 
+                        <p><strong>Place of birth:</strong> <%= item.birth_place %></p>  
+                        <p><strong>Death date:</strong> <%= item.death_date %></p>  
+                        <p><strong>Place of death:</strong> <%= item.death_place %></p>  
+                        <p><%= item.bio %></p> 
+                    </div>
+                </div>
+            </section>
+        <%else%>
+            <section> 
+                <div><strong><%= item.name %></strong></div> 
+                <div class = "content">
+                    <img src=<%= item.image_url %>>
+                    <div class = "data">
+                        <p><strong>Birthdate:</strong> <%= item.birth_date %></p> 
+                        <p><strong>Place of birth:</strong> <%= item.birth_place %></p>  
+                        <p><%= item.bio %></p> 
+                    </div>
+                </div>
+            </section>
+        <%end%>
+
+    <%end%>
 
 </body>
 </html>
